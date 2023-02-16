@@ -3,12 +3,12 @@ import React from "react";
 
 
 
-function Square() {
-  const [value,setValue] = useState(null);
+function Square({value}) {
+  // const [value,setValue] = useState(null);
   
   function onSquareClick(){
     console.log('click');
-    setValue('X');
+    // setValue('X');
   }
 
   return (
@@ -22,8 +22,8 @@ export default function Board() {
   return (
     <div className="game-board">
       <div className='board-row'>
-        <Square />
-        <Square />
+        <Square value={1}/>
+        <Square value={2}/>
         <Square />
       </div>
       <div className='board-row'>
