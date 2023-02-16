@@ -2,9 +2,18 @@ import { useEffect, useState } from 'react';
 import React from "react";
 
 
+
 function Square() {
+  const [value,setValue] = useState(null);
+  
+  function onSquareClick(){
+    console.log('click');
+    setValue('X');
+  }
+
   return (
-    <button className="square">
+    <button className="square" onClick={onSquareClick}>
+      {value}
     </button>
   )
 }
