@@ -1,8 +1,32 @@
 import { useEffect, useState } from 'react';
 import React from "react";
 
-export default function App() {
+
+function Square() {
   return (
-    <h1>Hello world</h1>
+    <button className="square">
+    </button>
+  )
+}
+
+export default function Board() {
+  return (
+    <div className="game-board">
+      <div className='board-row'>
+        <Square />
+        <Square />
+        <Square />
+      </div>
+      <div className='board-row'>
+        <Square />
+        <Square />
+        <Square />
+      </div>
+      <div className='board-row'>
+        <Square />
+        <Square />
+        <Square />
+      </div>
+    </div>  
   );
 }
