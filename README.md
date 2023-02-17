@@ -15,3 +15,12 @@ When you were passing onSquareClick={handleClick}, you were passing the handleCl
 
 <Square value={squares[0]} onSquareClick={handleClick(0)}/>
 ```
+
+
+To fix this, you could create a function like handleFirstSquareClick that calls handleClick(0), a function like handleSecondSquareClick that calls handleClick(1), and so on. Instead of calling them, you would pass these functions down as props like onSquareClick={handleFirstSquareClick}. This would solve the infinite loop.
+
+解決方法是要傳一個 fucntion 該 function 是有參數 0 的，參數　１的，等等…
+
+```JSX
+<Square value={squares[0]} onSquareClick={() => {handleClick(0)}}/>
+```
