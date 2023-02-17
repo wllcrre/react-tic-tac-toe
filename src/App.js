@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react';
 import React from "react";
 
-
-let winner = null;
-
 function Square({value,onSquareClick}) {
   // const [value,setValue] = useState(null);
   
