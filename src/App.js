@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import React from "react";
 
 function Square({value,onSquareClick}) {
-  // const [value,setValue] = useState(null);
   
   return (
     <button className="square" onClick={onSquareClick}>
@@ -11,10 +10,7 @@ function Square({value,onSquareClick}) {
   )
 }
 
-export default function Board() {
-  const [squares, setSquares] = useState(Array(9).fill(null));
-  const [xIsNext, setXIsNext] = useState(true);
-
+function Board({xIsNext, squares, onPlay}) {
   //這裏 winner 是 const, 因為 Board 每一手都會 re-render，所以一手只會有一個值：X or O or null
   const winner = calculateWinner(squares);
 
@@ -28,18 +24,17 @@ export default function Board() {
   console.log(squares);
 
   function handleClick(i) {
-    const nextSquares = squares.slice();
-    if (nextSquares[i] || calculateWinner(squares)) {
+    if (squares[i] || calculateWinner(squares)) {
       return;
     }
-
+    
+    const nextSquares = squares.slice();
     if (xIsNext) {
       nextSquares[i] = "X";
     }else{
       nextSquares[i] = "O";
     }
-    setSquares(nextSquares);
-    setXIsNext(!xIsNext);
+    onPlay(nextSquares);
   }
 
 
@@ -62,6 +57,35 @@ export default function Board() {
         <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
       </div>
     </>  
+  );
+}
+
+export default function Game() {
+
+  // important! : 注意 history 的 data format 是 [[]]
+  const [history, setHistory] = useState([Array(9).fill(null)]);
+
+  const [xIsNext, setXIsNext] = useState(true);
+  const currentSquares = history[history.length - 1];
+
+  function handlePlay(nextSquares) {
+    // important! : 注意 history 的 data format 是 [[]]
+    setHistory([...history,nextSquares]);
+    
+    setXIsNext(!xIsNext);
+
+    console.log(history);
+  }
+
+  return (
+    <div className="game">
+      <div className="game-board">
+        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
+      </div>
+      <div className="game-info">
+        <ol>{/*TODO*/}</ol>
+      </div>
+    </div>
   );
 }
 

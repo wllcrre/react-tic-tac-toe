@@ -24,3 +24,22 @@ To fix this, you could create a function like handleFirstSquareClick that calls 
 ```JSX
 <Square value={squares[0]} onSquareClick={() => {handleClick(0)}}/>
 ```
+
+## save history in Game()
+
+ref : 
+https://beta.reactjs.org/learn/tutorial-tic-tac-toe#lifting-state-up-again
+
+history = [[squares] + nextSquares] = [...squares,nextSquares];
+
+put history in Game()
+
+currentSquares = history[history.length - 1];
+
+pass currentSquares into Board()
+
+handleChick 中執行 onPlay()
+
+onPlay() in Game()
+
+onPlay() save history & currentSquares & xIsNext 
