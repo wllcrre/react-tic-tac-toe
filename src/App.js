@@ -65,8 +65,10 @@ export default function Game() {
   // important! : 注意 history 的 data format 是 [[]]
   const [history, setHistory] = useState([Array(9).fill(null)]);
 
-  const [xIsNext, setXIsNext] = useState(true);
+  // const [xIsNext, setXIsNext] = useState(true);
   const [currentMove, setCurrentMove] = useState(0);
+
+  const xIsNext = currentMove % 2 === 0;
 
   // const currentSquares = history[history.length - 1];
   const currentSquares = history[currentMove];
@@ -74,7 +76,7 @@ export default function Game() {
 
   function jumpTo(move) {
     setCurrentMove(move);
-    setXIsNext(move % 2 === 0);
+    // setXIsNext(move % 2 === 0);//不用了
   }
 
   function handlePlay(nextSquares) {
@@ -86,7 +88,7 @@ export default function Game() {
     setHistory(nextHistory);
     setCurrentMove(nextHistory.length - 1);
 
-    setXIsNext(!xIsNext);
+    // setXIsNext(!xIsNext);//不用了
 
     console.log(history);
   }
