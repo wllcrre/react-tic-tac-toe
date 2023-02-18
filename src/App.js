@@ -66,11 +66,25 @@ export default function Game() {
   const [history, setHistory] = useState([Array(9).fill(null)]);
 
   const [xIsNext, setXIsNext] = useState(true);
-  const currentSquares = history[history.length - 1];
+  const [currentMove, setCurrentMove] = useState(0);
+
+  // const currentSquares = history[history.length - 1];
+  const currentSquares = history[currentMove];
+
+
+  function jumpTo(move) {
+    setCurrentMove(move);
+    setXIsNext(move % 2 === 0);
+  }
 
   function handlePlay(nextSquares) {
     // important! : 注意 history 的 data format 是 [[]]
-    setHistory([...history,nextSquares]);
+    // setHistory([...history,nextSquares]);
+
+    // setHistory　因應 jumpTo() 的改變
+    const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
+    setHistory(nextHistory);
+    setCurrentMove(nextHistory.length - 1);
 
     setXIsNext(!xIsNext);
 
@@ -82,12 +96,12 @@ export default function Game() {
     if( move > 0 ){
       description = 'Go to move #' + move;
     }else{
-      description = 'Start';
+      description = 'Go to game start';
     }
 
     return (
       <li key={move}>
-        <button>{description}</button>
+        <button onClick={() => {jumpTo(move)}}>{description}</button>
       </li>
     )
 
